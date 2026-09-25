@@ -3,46 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>یه سوال مهم 🥺</title>
+    <title>برای دخترخانومِ ناراحت 🥺</title>
     <style>
         body {
             font-family: Tahoma, sans-serif;
             text-align: center;
-            background-color: #ffe6e6; /* رنگ پس‌زمینه صورتی ملایم */
+            /* پس‌زمینه عکس ماه و ستاره */
+            background: url('https://images.unsplash.com/photo-1517865288-912b483c6f4d?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
-        .container {
-            background: white;
+        
+        /* این کلاس باکس‌های شیشه‌ای و خوشگل می‌سازه */
+        .card {
+            background: rgba(255, 255, 255, 0.85); /* پس‌زمینه سفید نیمه‌شفاف */
+            backdrop-filter: blur(10px); /* تار کردن بک‌گراند زیر باکس */
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 400px;
+            display: none; /* اولش همه مخفین */
+            animation: fadeIn 0.5s ease-in-out;
         }
-        h1 { color: #d63031; }
+        
+        /* برای نمایش دادن باکس فعال */
+        .active {
+            display: block;
+        }
+
+        h2 { 
+            color: #2c3e50; 
+            margin-bottom: 25px;
+        }
+
         .btn {
-            background-color: #ff7675;
+            background-color: #34495e;
             color: white;
             border: none;
             padding: 12px 24px;
             margin: 10px;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
             transition: 0.3s;
+            width: 80%;
+            font-family: inherit;
         }
-        .btn:hover { background-color: #d63031; }
+        
+        .btn:hover { 
+            background-color: #e74c3c; 
+            transform: scale(1.05);
+        }
+
+        /* استایل مخصوص بچه جگوار و باکس متن */
+        .jaguar-container {
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .jaguar-img {
+            width: 100px;
+            position: relative;
+            z-index: 10;
+            margin-bottom: -15px; /* باعث میشه بیاد روی لبه‌ی باکس متن */
+        }
+        
+        textarea {
+            width: 100%;
+            height: 120px;
+            border-radius: 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 2px solid #bdc3c7;
+            font-family: inherit;
+            font-size: 15px;
+            resize: none;
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.9);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>آخر هفته برای دیت چیکار کنیم؟ 🥰</h1>
-        <p>یکی از گزینه‌های زیر رو انتخاب کن:</p>
-        <button class="btn" onclick="alert('ایول! پس بریم کافه ☕')">بریم کافه</button>
-        <button class="btn" onclick="alert('عالیه! بریم یه فیلم خفن ببینیم 🎬')">فیلم ببینیم</button>
-        <button class="btn" onclick="alert('پایه‌ام! بریم پیاده‌روی 🚶‍♀️')">قدم بزنیم</button>
+
+    <!-- صفحه اول: دلیل ناراحتی -->
+    <div id="step1" class="card active">
+        <h2>دخترخانوم چرا ناراحتی؟ 🥺</h2>
+        <!-- این دکمه با رفتن موس روش ایموجیش عوض میشه -->
+        <button class="btn" id="meBtn" onmouseover="changeEmoji('😭')" onmouseout="changeEmoji('😊')" onclick="showStep('step-me')">
+            من 😊
+        </button>
+        <button class="btn" onclick="showStep('step2')">
+            چیزای دیگه 🤷‍♀️
+        </button>
     </div>
+
+    <!-- صفحه دوم: دوست داری صحبت کنی؟ -->
+    <div id="step2" class="card">
+        <h2>دوست داری درموردش صحبت کنی؟ 🫂</h2>
+        <button class="btn" onclick="showStep('step3')">آره، گوشِت با منه؟ 🥺</button>
+        <button class="btn" onclick="showStep('step-salty')">نه چُسیم تو برقه 🔌😤</button>
+    </div>
+
+    <!-- صفحه سوم: نوشتن متن و ارسال -->
+    <div id="step3" class="card">
+        <h2>هرچی تو دلته اینجا بنویس:</h2>
+        
+        <div class="jaguar-container">
+            <!-- عکس یک بچه پلنگ/جگوار بامزه -->
+            <img src="https://cdn-icons-png.flaticon.com/512/826/826955.png" alt="Baby Jaguar" class="jaguar-img">
+            <textarea id="userText" placeholder="من سراپا گوشم..."></textarea>
+        </div>
+        
+        <button class="btn" style="background-color: #27ae60; margin-top: 20px;" onclick="sendEmail()">
+            بفرست برای پوریا 💌
+        </button>
+    </div>
+
+    <!-- صفحه مربوط به "من" (دلیل ناراحتی تو باشی) -->
+    <div id="step-me" class="card">
+        <h2>(اینجا رو بعداً با هم تکمیل می‌کنیم!)</h2>
+    </div>
+
+    <!-- صفحه مربوط به "چسیم تو برقه" -->
+    <div id="step-salty" class="card">
+        <h2>(اینجا رو هم بعداً با هم تکمیل می‌کنیم!)</h2>
+    </div>
+
+    <script>
+        // تابع تغییر صفحات
+        function showStep(stepId) {
+            // اول همه باکس‌ها رو مخفی می‌کنیم
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('active');
+            });
+            // بعد باکسی که می‌خوایم رو نشون می‌دیم
+            document.getElementById(stepId).classList.add('active');
+        }
+
+        // تابع تغییر ایموجی دکمه "من"
+        function changeEmoji(emoji) {
+            document.getElementById('meBtn').innerText = 'من ' + emoji;
+        }
+
+        // تابع ارسال ایمیل
+        function sendEmail() {
+            const text = document.getElementById('userText').value;
+            
+            if(text.trim() === "") {
+                alert("اول یه چیزی بنویس خب! من که علم غیب ندارم 🥺");
+                return;
+            }
+
+            // ساخت لینک برای باز کردن جیمیل
+            const subject = encodeURIComponent("حرفای دلم 🥺");
+            const body = encodeURIComponent(text);
+            const mailtoLink = `mailto:mmpooriya@gmail.com?subject=${subject}&body=${body}`;
+            
+            // هدایت به اپلیکیشن ایمیل
+            window.location.href = mailtoLink;
+        }
+    </script>
 </body>
 </html>
