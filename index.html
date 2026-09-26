@@ -8,7 +8,6 @@
         body {
             font-family: Tahoma, sans-serif;
             text-align: center;
-            /* پس‌زمینه عکس ماه و ستاره */
             background: url('https://images.unsplash.com/photo-1517865288-912b483c6f4d?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             display: flex;
@@ -19,27 +18,31 @@
             overflow: hidden;
         }
         
-        /* این کلاس باکس‌های شیشه‌ای و خوشگل می‌سازه */
         .card {
-            background: rgba(255, 255, 255, 0.85); /* پس‌زمینه سفید نیمه‌شفاف */
-            backdrop-filter: blur(10px); /* تار کردن بک‌گراند زیر باکس */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             width: 90%;
-            max-width: 400px;
-            display: none; /* اولش همه مخفین */
+            max-width: 450px;
+            display: none;
             animation: fadeIn 0.5s ease-in-out;
+            line-height: 1.6;
         }
         
-        /* برای نمایش دادن باکس فعال */
-        .active {
-            display: block;
-        }
+        .active { display: block; }
 
         h2 { 
             color: #2c3e50; 
             margin-bottom: 25px;
+            font-size: 20px;
+        }
+        
+        h3 {
+            color: #e74c3c;
+            font-size: 18px;
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -47,21 +50,20 @@
             color: white;
             border: none;
             padding: 12px 24px;
-            margin: 10px;
+            margin: 8px;
             border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             transition: 0.3s;
-            width: 80%;
+            width: 85%;
             font-family: inherit;
         }
         
         .btn:hover { 
             background-color: #e74c3c; 
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
-        /* استایل مخصوص بچه جگوار و باکس متن */
         .jaguar-container {
             position: relative;
             margin-top: 10px;
@@ -71,7 +73,7 @@
             width: 100px;
             position: relative;
             z-index: 10;
-            margin-bottom: -15px; /* باعث میشه بیاد روی لبه‌ی باکس متن */
+            margin-bottom: -15px;
         }
         
         textarea {
@@ -89,6 +91,14 @@
             background: rgba(255,255,255,0.9);
         }
 
+        .restart-btn {
+            background-color: #95a5a6;
+            margin-top: 20px;
+            width: auto;
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -100,15 +110,11 @@
     <!-- صفحه اول: دلیل ناراحتی -->
     <div id="step1" class="card active">
         <h2>دخترخانوم چرا ناراحتی؟ 🥺</h2>
-        <!-- این دکمه با رفتن موس روش ایموجیش عوض میشه -->
-        <button class="btn" id="meBtn" onmouseover="changeEmoji('😭')" onmouseout="changeEmoji('😊')" onclick="showStep('step-me')">
-            من 😊
-        </button>
-        <button class="btn" onclick="showStep('step2')">
-            چیزای دیگه 🤷‍♀️
-        </button>
+        <button class="btn" id="meBtn" onmouseover="changeEmoji('😭')" onmouseout="changeEmoji('😊')" onclick="showStep('step-me')">من 😊</button>
+        <button class="btn" onclick="showStep('step2')">چیزای دیگه 🤷‍♀️</button>
     </div>
 
+    <!-- ================== مسیر "چیزای دیگه" ================== -->
     <!-- صفحه دوم: دوست داری صحبت کنی؟ -->
     <div id="step2" class="card">
         <h2>دوست داری درموردش صحبت کنی؟ 🫂</h2>
@@ -116,63 +122,93 @@
         <button class="btn" onclick="showStep('step-salty')">نه چُسیم تو برقه 🔌😤</button>
     </div>
 
-    <!-- صفحه سوم: نوشتن متن و ارسال -->
+    <!-- صفحه سوم: نوشتن متن و ارسال ایمیل -->
     <div id="step3" class="card">
         <h2>هرچی تو دلته اینجا بنویس:</h2>
-        
         <div class="jaguar-container">
-            <!-- عکس یک بچه پلنگ/جگوار بامزه -->
             <img src="https://cdn-icons-png.flaticon.com/512/826/826955.png" alt="Baby Jaguar" class="jaguar-img">
             <textarea id="userText" placeholder="من سراپا گوشم..."></textarea>
         </div>
-        
-        <button class="btn" style="background-color: #27ae60; margin-top: 20px;" onclick="sendEmail()">
-            بفرست برای پوریا 💌
-        </button>
+        <button class="btn" style="background-color: #27ae60; margin-top: 20px;" onclick="sendEmail()">بفرست برای پوریا 💌</button>
+        <br><button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
-    <!-- صفحه مربوط به "من" (دلیل ناراحتی تو باشی) -->
-    <div id="step-me" class="card">
-        <h2>(اینجا رو بعداً با هم تکمیل می‌کنیم!)</h2>
-    </div>
-
-    <!-- صفحه مربوط به "چسیم تو برقه" -->
+    <!-- صفحه چسیم تو برقه (هم از مسیر "من" میاد هم از مسیر "چیزای دیگه") -->
     <div id="step-salty" class="card">
-        <h2>(اینجا رو هم بعداً با هم تکمیل می‌کنیم!)</h2>
+        <h2>اخه دورت بگردم اگه من ندونم چی ناراحتت میکنه که نمیتونم بدونم چطوری قربونت بشم تا حالتو بهتر کنم:) <br><br>بیام دنبالت دور بزنیم؟ 🚗❤️</h2>
+        <button class="btn" onclick="alert('ایول! الان راه میفتم 😍')">آره بیا دنبالم 🥺</button>
+        <br><button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
+    </div>
+
+    <!-- ================== مسیر "من" ================== -->
+    <!-- صفحه 1 مسیر من -->
+    <div id="step-me" class="card">
+        <h2>چرا از من ناراحتی عزیزدلم؟</h2>
+        <button class="btn" onclick="showStep('step-booty-start')">چون روی کون شما نظر دارم 🙈</button>
+        <button class="btn" onclick="showStep('step-salty')">همینطوری چسیم تو برقه به تو چه 😤</button>
+    </div>
+
+    <!-- صفحه انتخاب بعد از اعتراف -->
+    <div id="step-booty-start" class="card">
+        <h2>انتخاب کن:</h2>
+        <button class="btn" onclick="showStep('step-booty-confess')">خدایی بیا قبول کن خیلی کون خوبی داری شما :) 🍑</button>
+        <button class="btn" onclick="showStep('step-booty-no')">نهه 🙅‍♀️</button>
+    </div>
+
+    <!-- نتیجه گزینه "خدایی بیا قبول کن..." -->
+    <div id="step-booty-confess" class="card">
+        <h3>خب دیگه حق بده میخوام بیام برات دست خودم نیستتتتتت! 😫</h3>
+        <h2>چرا کون به اون خوبی صاحبش باید انقد خودخواه باشه 😭</h2>
+        <button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
+    </div>
+
+    <!-- نتیجه گزینه "نهه" -->
+    <div id="step-booty-no" class="card">
+        <h2>مطمئنی؟ 🤔</h2>
+        <button class="btn" onclick="showStep('step-booty-try-harder')">نه با تلاش بیشتر 💪</button>
+        <button class="btn" onclick="showStep('step-booty-never')">نه اصلا فکرشم نکن 🚫</button>
+    </div>
+
+    <!-- نتیجه گزینه "نه با تلاش بیشتر" -->
+    <div id="step-booty-try-harder" class="card">
+        <h2>then i will conquer what is mine? هی هی 😁😈</h2>
+        <button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
+    </div>
+
+    <!-- نتیجه گزینه "نه اصلا فکرشم نکن" -->
+    <div id="step-booty-never" class="card">
+        <h3>چرا خدا باید کون به این خوبیه به ادم همچین ادم خودخواهی بده اخه!!! 😫</h3>
+        <h2>بعد مثلا چطوری جبران کنم برات جوجه یبس من؟ 🥰</h2>
+        
+        <!-- گزینه‌های دیت -->
+        <button class="btn" onclick="alert('عالیه! بریم یه کافه دنج پیدا کنیم ☕')">بریم کافه لاته بخوریم ☕</button>
+        <button class="btn" onclick="alert('پیش به سوی خوشمزه‌ترین غذای دنیا! 🍕')">بریم شام غذای مورد علاقمو بخوریم 🍕</button>
+        <button class="btn" onclick="alert('حله! بپوش که اومدم 🚗')">بریم دور دور موزیک گوش بدیم 🎶</button>
+        
+        <br><button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
     <script>
-        // تابع تغییر صفحات
         function showStep(stepId) {
-            // اول همه باکس‌ها رو مخفی می‌کنیم
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.remove('active');
             });
-            // بعد باکسی که می‌خوایم رو نشون می‌دیم
             document.getElementById(stepId).classList.add('active');
         }
 
-        // تابع تغییر ایموجی دکمه "من"
         function changeEmoji(emoji) {
             document.getElementById('meBtn').innerText = 'من ' + emoji;
         }
 
-        // تابع ارسال ایمیل
         function sendEmail() {
             const text = document.getElementById('userText').value;
-            
             if(text.trim() === "") {
                 alert("اول یه چیزی بنویس خب! من که علم غیب ندارم 🥺");
                 return;
             }
-
-            // ساخت لینک برای باز کردن جیمیل
             const subject = encodeURIComponent("حرفای دلم 🥺");
             const body = encodeURIComponent(text);
-            const mailtoLink = `mailto:mmpooriya@gmail.com?subject=${subject}&body=${body}`;
-            
-            // هدایت به اپلیکیشن ایمیل
-            window.location.href = mailtoLink;
+            window.location.href = `mailto:mmpooriya@gmail.com?subject=${subject}&body=${body}`;
         }
     </script>
 </body>
