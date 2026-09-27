@@ -107,82 +107,88 @@
 </head>
 <body>
 
-    <!-- صفحه اول -->
+    <!-- صفحه اول: دلیل ناراحتی -->
     <div id="step1" class="card active">
         <h2>دخترخانوم چرا ناراحتی؟ 🥺</h2>
         <button class="btn" id="meBtn" onmouseover="changeEmoji('😭')" onmouseout="changeEmoji('😊')" onclick="showStep('step-me')">من 😊</button>
         <button class="btn" onclick="showStep('step2')">چیزای دیگه 🤷‍♀️</button>
     </div>
 
-    <!-- مسیر "چیزای دیگه" -->
+    <!-- ================== مسیر "چیزای دیگه" ================== -->
+    <!-- صفحه دوم: دوست داری صحبت کنی؟ -->
     <div id="step2" class="card">
         <h2>دوست داری درموردش صحبت کنی؟ 🫂</h2>
         <button class="btn" onclick="showStep('step3')">آره، گوشِت با منه؟ 🥺</button>
         <button class="btn" onclick="showStep('step-salty')">نه چُسیم تو برقه 🔌😤</button>
     </div>
 
-    <!-- نوشتن متن و ارسال ایمیل -->
+    <!-- صفحه سوم: نوشتن متن و ارسال ایمیل -->
     <div id="step3" class="card">
         <h2>هرچی تو دلته اینجا بنویس:</h2>
         <div class="jaguar-container">
             <img src="https://cdn-icons-png.flaticon.com/512/826/826955.png" alt="Baby Jaguar" class="jaguar-img">
             <textarea id="userText" placeholder="من سراپا گوشم..."></textarea>
         </div>
-        <button class="btn" style="background-color: #27ae60; margin-top: 20px;" onclick="sendCustomTextEmail()">بفرست برای پوریا 💌</button>
+        <button class="btn" style="background-color: #27ae60; margin-top: 20px;" onclick="sendEmail()">بفرست برای پوریا 💌</button>
         <br><button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
-    <!-- صفحه چسیم تو برقه -->
+    <!-- صفحه چسیم تو برقه (هم از مسیر "من" میاد هم از مسیر "چیزای دیگه") -->
     <div id="step-salty" class="card">
         <h2>اخه دورت بگردم اگه من ندونم چی ناراحتت میکنه که نمیتونم بدونم چطوری قربونت بشم تا حالتو بهتر کنم:) <br><br>بیام دنبالت دور بزنیم؟ 🚗❤️</h2>
-        <button class="btn" onclick="sendActionEmail('بیا دنبالم! 🚗❤️', 'دلم گرفته، پاشو بیا دنبالم بریم دور بزنیم...', 'ایول! الان راه میفتم 😍')">آره بیا دنبالم 🥺</button>
+        <button class="btn" onclick="alert('ایول! الان راه میفتم 😍')">آره بیا دنبالم 🥺</button>
         <br><button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
-    <!-- مسیر "من" -->
+    <!-- ================== مسیر "من" ================== -->
+    <!-- صفحه 1 مسیر من -->
     <div id="step-me" class="card">
         <h2>چرا از من ناراحتی عزیزدلم؟</h2>
         <button class="btn" onclick="showStep('step-booty-start')">چون روی کون شما نظر دارم 🙈</button>
         <button class="btn" onclick="showStep('step-salty')">همینطوری چسیم تو برقه به تو چه 😤</button>
     </div>
 
+    <!-- صفحه انتخاب بعد از اعتراف -->
     <div id="step-booty-start" class="card">
         <h2>انتخاب کن:</h2>
         <button class="btn" onclick="showStep('step-booty-confess')">خدایی بیا قبول کن خیلی کون خوبی داری شما :) 🍑</button>
         <button class="btn" onclick="showStep('step-booty-no')">نهه 🙅‍♀️</button>
     </div>
 
+    <!-- نتیجه گزینه "خدایی بیا قبول کن..." -->
     <div id="step-booty-confess" class="card">
         <h3>خب دیگه حق بده میخوام بیام برات دست خودم نیستتتتتت! 😫</h3>
         <h2>چرا کون به اون خوبی صاحبش باید انقد خودخواه باشه 😭</h2>
         <button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
+    <!-- نتیجه گزینه "نهه" -->
     <div id="step-booty-no" class="card">
         <h2>مطمئنی؟ 🤔</h2>
         <button class="btn" onclick="showStep('step-booty-try-harder')">نه با تلاش بیشتر 💪</button>
         <button class="btn" onclick="showStep('step-booty-never')">نه اصلا فکرشم نکن 🚫</button>
     </div>
 
+    <!-- نتیجه گزینه "نه با تلاش بیشتر" -->
     <div id="step-booty-try-harder" class="card">
         <h2>then i will conquer what is mine? هی هی 😁😈</h2>
         <button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
+    <!-- نتیجه گزینه "نه اصلا فکرشم نکن" -->
     <div id="step-booty-never" class="card">
         <h3>چرا خدا باید کون به این خوبیه به ادم همچین ادم خودخواهی بده اخه!!! 😫</h3>
         <h2>بعد مثلا چطوری جبران کنم برات جوجه یبس من؟ 🥰</h2>
         
-        <!-- گزینه‌های دیت که هرکدام ایمیل مجزا می‌فرستند -->
-        <button class="btn" onclick="sendActionEmail('قرار کافه ☕', 'پاشو بیا بریم کافه لاته بخوریم...', 'عالیه! بریم یه کافه دنج پیدا کنیم ☕')">بریم کافه لاته بخوریم ☕</button>
-        <button class="btn" onclick="sendActionEmail('قرار شام 🍕', 'پاشو بیا بریم شام غذای مورد علاقمو بخوریم...', 'پیش به سوی خوشمزه‌ترین غذای دنیا! 🍕')">بریم شام غذای مورد علاقمو بخوریم 🍕</button>
-        <button class="btn" onclick="sendActionEmail('بیا دنبالم دور دور 🚗', 'حله! بپوش بیا دنبالم بریم دور دور موزیک گوش بدیم...', 'حله! بپوش که اومدم 🚗')">بریم دور دور موزیک گوش بدیم 🎶</button>
+        <!-- گزینه‌های دیت -->
+        <button class="btn" onclick="alert('عالیه! بریم یه کافه دنج پیدا کنیم ☕')">بریم کافه لاته بخوریم ☕</button>
+        <button class="btn" onclick="alert('پیش به سوی خوشمزه‌ترین غذای دنیا! 🍕')">بریم شام غذای مورد علاقمو بخوریم 🍕</button>
+        <button class="btn" onclick="alert('حله! بپوش که اومدم 🚗')">بریم دور دور موزیک گوش بدیم 🎶</button>
         
         <br><button class="btn restart-btn" onclick="showStep('step1')">برگردیم اول</button>
     </div>
 
     <script>
-        // تابع تغییر صفحات
         function showStep(stepId) {
             document.querySelectorAll('.card').forEach(card => {
                 card.classList.remove('active');
@@ -190,13 +196,11 @@
             document.getElementById(stepId).classList.add('active');
         }
 
-        // تابع تغییر ایموجی
         function changeEmoji(emoji) {
             document.getElementById('meBtn').innerText = 'من ' + emoji;
         }
 
-        // تابع ارسال ایمیل برای متن دلخواه (مرحله حرف زدن)
-        function sendCustomTextEmail() {
+        function sendEmail() {
             const text = document.getElementById('userText').value;
             if(text.trim() === "") {
                 alert("اول یه چیزی بنویس خب! من که علم غیب ندارم 🥺");
@@ -205,18 +209,6 @@
             const subject = encodeURIComponent("حرفای دلم 🥺");
             const body = encodeURIComponent(text);
             window.location.href = `mailto:mmpooriya@gmail.com?subject=${subject}&body=${body}`;
-        }
-
-        // تابع جامع برای دکمه‌های "بیا دنبالم" و گزینه‌های دیت
-        function sendActionEmail(subjectText, bodyText, alertMessage) {
-            const subject = encodeURIComponent(subjectText);
-            const body = encodeURIComponent(bodyText);
-            window.location.href = `mailto:mmpooriya@gmail.com?subject=${subject}&body=${body}`;
-            
-            // نمایش پیغام بامزه بعد از کلیک
-            setTimeout(() => {
-                alert(alertMessage);
-            }, 500);
         }
     </script>
 </body>
